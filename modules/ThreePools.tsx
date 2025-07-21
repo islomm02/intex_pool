@@ -1,7 +1,11 @@
-import PoolCard from "@/components/PoolCard"
-import { idText } from "typescript"
+// import PoolCard from "@/components/PoolCard"
+import { FC } from "react";
 
-const ThreePools = () => {
+interface ThreePoolsProps {
+  onOpen: (item: any) => void;
+}
+
+const ThreePools:FC<ThreePoolsProps> = ({onOpen}) => {
     const fakePoolsData = [
         {
             id: 1,
@@ -30,7 +34,7 @@ const ThreePools = () => {
     ]
   return (
     <div className="px-[166px] py-[97px] flex gap-[41px] flex-wrap ">
-        {fakePoolsData.map((item) =>  (<PoolCard item={item} key={item.id} />) )}
+        {/* {fakePoolsData.map((item) =>  (<PoolCard onOpen={onOpen} item={item} key={item.id} />) )} */}
     </div>
   )
 }
