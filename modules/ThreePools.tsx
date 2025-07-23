@@ -1,40 +1,29 @@
-// import PoolCard from "@/components/PoolCard"
-import { FC } from "react";
+"use client"
+import PoolCard from "@/components/PoolCard"
+import { FC, useEffect, useState } from "react";
+import { PoolsDataType } from "./Pools";
+import { API } from "@/hooks/getEnv";
 
 interface ThreePoolsProps {
   onOpen: (item: any) => void;
 }
 
 const ThreePools:FC<ThreePoolsProps> = ({onOpen}) => {
-    const fakePoolsData = [
-        {
-            id: 1,
-            title: "Металлический каркас",
-            img: "https://rizesport.uz/thumb/2/TDJpfWeUX5aJMzAfBxuQOw/400r400/d/intex_28202.jpg",
-            oldPrice: 1090000,
-            price: 1090000,
-            additional: "recomend"
-        },
-        {
-            id: 2,
-            title: "Металлический каркас",
-            img: "https://rizesport.uz/thumb/2/TDJpfWeUX5aJMzAfBxuQOw/400r400/d/intex_28202.jpg",
-            oldPrice: 1090000,
-            price: 1090000,
-            additional: "recomend"
-        },
-        {
-            id: 3,
-            title: "Металлический каркас",
-            img: "https://rizesport.uz/thumb/2/TDJpfWeUX5aJMzAfBxuQOw/400r400/d/intex_28202.jpg",
-            oldPrice: 1090000,
-            price: 1090000,
-            additional: "recomend"
-        }
-    ]
+  
+  const [poolsData, setPoolsData] = useState<PoolsDataType | null>(null);
+  
+      useEffect(() => {
+          fetch(`${API}/api/products?categoryId=1ed90e97-b42f-4c46-97e1-4fafb7b2c6f4`)
+              .then((res) => res.json())
+              .then((data) => {
+                  setPoolsData(data);
+              });
+      }, []);
+
+
   return (
-    <div className="px-[166px] py-[97px] flex gap-[41px] flex-wrap ">
-        {/* {fakePoolsData.map((item) =>  (<PoolCard onOpen={onOpen} item={item} key={item.id} />) )} */}
+    <div className=" px-[58px] sm:px-[166px] py-[97px] flex gap-[41px] flex-wrap ">
+        {poolsData?.data.map((item) =>  (<PoolCard onOpen={onOpen} item={item} key={item.id} />) )}
     </div>
   )
 }

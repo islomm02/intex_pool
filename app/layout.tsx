@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { League_Spartan } from "next/font/google"; 
 import "./globals.css";
 import Navbar from "@/modules/Navbar";
+import { LanguageProvider } from "@/context/Context";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,11 +32,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} ${spartan.variable} antialiased`}
-      >
-        <Navbar />
+      <body className={`${geistSans.variable} ${geistMono.variable} ${spartan.variable} antialiased`}>
+        <LanguageProvider>
         {children}
+        </LanguageProvider>
       </body>
     </html>
   );

@@ -1,7 +1,6 @@
 "use client";
 
-// Pools.tsx
-// import PoolCard from "@/components/PoolCard";
+import PoolCard from "@/components/PoolCard";
 import { API } from "@/hooks/getEnv";
 import { MetaType, PoolsType } from "@/types";
 import { log } from "console";
@@ -11,7 +10,7 @@ interface PoolsProps {
     onOpen: (item: any) => void;
 }
 
-interface PoolsDataType{
+export interface PoolsDataType{
     data: PoolsType[],
     meta: MetaType
 }
@@ -20,7 +19,7 @@ const Pools: React.FC<PoolsProps> = ({ onOpen }) => {
     const [poolsData, setPoolsData] = useState<PoolsDataType | null>(null);
 
     useEffect(() => {
-        fetch(`${API}/products`)
+        fetch(`${API}/api/products`)
             .then((res) => res.json())
             .then((data) => {
                 setPoolsData(data);
@@ -128,10 +127,10 @@ const Pools: React.FC<PoolsProps> = ({ onOpen }) => {
     ];
 
     return (
-        <div className="px-[166px] py-[97px] flex gap-[41px] flex-wrap">
-            {/* {poolsData?.data.map((item: PoolsType) => (
+        <div className="px-[58px] sm:px-[166px] py-[97px] flex gap-[41px] flex-wrap">
+            {poolsData?.data.map((item: PoolsType) => (
                 <PoolCard key={item.id} item={item} onOpen={onOpen} />
-            ))} */}
+            ))}
         </div>
     );
 };
