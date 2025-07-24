@@ -9,10 +9,6 @@ const nextConfig = {
         pathname: '**',
       },
     ],
-  },
-  experimental: {
-    appDir: true,
-  },
-};
+  }};
 
 export default nextConfig;
