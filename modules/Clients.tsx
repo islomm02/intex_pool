@@ -8,7 +8,8 @@ import { useEffect, useState } from "react";
 
 const Clients = () => {
 
-    const [lang, setLang] = useState<'uz' | 'ru'>("ru");
+    const [lang, setLang] = useState<any>(localStorage.getItem("lang") || null )
+
     
       useEffect(() => {
         const existingLang = document.cookie

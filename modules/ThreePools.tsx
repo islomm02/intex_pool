@@ -20,6 +20,9 @@ const ThreePools:FC<ThreePoolsProps> = ({onOpen}) => {
               });
       }, []);
 
+    const [lang, setLang] = useState<any>(localStorage.getItem("lang") || null )
+
+
 
   return (
     <div className=" px-[58px] sm:px-[166px] py-[97px] flex gap-[41px] flex-wrap ">

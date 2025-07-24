@@ -1,9 +1,10 @@
 "use client";
 
-import { useLanguage } from "@/hooks/SetLanguage";
+import { useState } from "react";
 
 const SalePage = () => {
-  const [lang] = useLanguage();
+  const [lang, setLang] = useState<any>(localStorage.getItem("lang") || null )
+  
 
   return (
     <>

@@ -1,10 +1,12 @@
 "use client"
-import { useLanguage } from "@/hooks/SetLanguage"
+
 import BorderDiv from "./BorderDiv"
+import { useState } from "react"
 
 const DeliveryDiv = ({ extraClass, isOpen}: { extraClass?: string, isOpen:any  }) => {
 
-  const [lang, setLang] = useLanguage()
+    const [lang, setLang] = useState<any>(localStorage.getItem("lang") || null )
+
 
   return (
 <>

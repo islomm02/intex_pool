@@ -1,45 +1,30 @@
 "use client"
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 type Language = 'uz' | 'ru';
 
 interface LanguageContextType {
   lang: Language;
   setLang: (lang: Language) => void;
+  toggleLang: () => void;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
-export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [lang, setLangState] = useState<Language>('uz');
+export const LanguageProvider = ({ children }: { children: ReactNode }) => {
+  const [lang, setLang] = useState<Language>('uz');
 
-  useEffect(() => {
-    const existingLang = document.cookie
-      .split("; ")
-      .find((row) => row.startsWith("language="))
-      ?.split("=")[1] as Language;
-
-    if (existingLang === 'uz' || existingLang === 'ru') {
-      setLangState(existingLang);
-    }
-  }, []);
-
-  useEffect(() => {
-    document.cookie = `language=${lang}; path=/; max-age=31536000`;
-  }, [lang]);
-
-  const setLang = (newLang: Language) => {
-    setLangState(newLang);
+  const toggleLang = () => {
+    setLang(prev => (prev === 'uz' ? 'ru' : 'uz'));
   };
 
   return (
-    <LanguageContext.Provider value={{ lang, setLang }}>
+    <LanguageContext.Provider value={{ lang, setLang, toggleLang }}>
       {children}
     </LanguageContext.Provider>
   );
 };
 
-// Custom hook
 export const useLanguage = () => {
   const context = useContext(LanguageContext);
   if (!context) {

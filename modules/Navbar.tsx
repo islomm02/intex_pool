@@ -1,5 +1,5 @@
 "use client";
-import { InstaIcon, RuIcon, TelegramIcon, UzIcon } from "@/assets/icons";
+import { InstaIcon, RuIcon, TelegramIcon, TelIcon, UzIcon } from "@/assets/icons";
 import SidebarMenu from "@/components/SideBar";
 import { API } from "@/hooks/getEnv";
 import { getSiteData } from "@/hooks/getSite";
@@ -24,12 +24,15 @@ const Navbar = () => {
             console.error("Xatolik:", err);
         }
     };
+    const [lang, setLang] = useState<any>(localStorage.getItem("lang") || null )
 
-    const [lang, setLang] = useLanguage();
+    console.log(lang);
+    
+
     function handleChangeLang() {
         const newLang = lang === "uz" ? "ru" : "uz";
         setLang(newLang);
-        document.cookie = `language=${newLang}; path=/; max-age=31536000`;
+        localStorage.setItem("lang",newLang)
     }
 
     useEffect(() => {
@@ -41,18 +44,24 @@ const Navbar = () => {
         getSiteData();
     }, []);
 
+    const handleScroll = (id:string) => {
+    document.getElementById(id)?.scrollIntoView({
+      behavior: "smooth",
+    });
+  };
+
     return (
         <>
             <div className="bg-[#009398] py-[20px] w-full pt-[40px] sm:pt-[20px] ">
                 <div className="flex justify-between px-[24px] sm:px-[65px] items-center ">
                     <strong className="text-[24px]">INTEX-MARKET.UZ</strong>
                     <div className="hidden sm:flex gap-[19px] ">
-                        <strong>
+                        <strong onClick={() => handleScroll("karkasniy")}>
                             {lang == "ru"
                                 ? "Каркасные бассейны"
                                 : "Ramkali hovuzlar"}
                         </strong>
-                        <strong>
+                        <strong onClick={() => handleScroll("naduvniy")} >
                             {lang == "ru"
                                 ? "Надувные бассейны"
                                 : "Puflanadigan basseynlar"}
@@ -64,14 +73,7 @@ const Navbar = () => {
                         </p>
                         <div className="flex  ">
                             <a href={`tel:${siteData?.phone}`}>
-                                <Image
-                                    className=" w-[27px] h-[25px] sm:hidden cursor-pointer  rounded-md"
-                                    src="/image.png"
-                                    alt="TelegramIcon"
-                                    priority
-                                    width={25}
-                                    height={25}
-                                />
+                                <TelIcon/>
                             </a>
                             <a
                                 target="_blank"
@@ -104,6 +106,7 @@ const Navbar = () => {
                 </div>
             </div>
             <SidebarMenu
+            key={"1"}
                 isOpen={isSidebarOpen}
                 onClose={() => setIsSidebarOpen(false)}
             />

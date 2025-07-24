@@ -18,6 +18,9 @@ export interface PoolsDataType{
 const Pools: React.FC<PoolsProps> = ({ onOpen }) => {
     const [poolsData, setPoolsData] = useState<PoolsDataType | null>(null);
 
+    const [lang, setLang] = useState<any>(localStorage.getItem("lang") || null )
+
+
     useEffect(() => {
         fetch(`${API}/api/products`)
             .then((res) => res.json())

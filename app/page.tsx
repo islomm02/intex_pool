@@ -31,7 +31,8 @@ export default function Home() {
     setIsOpen(true);
   };
 
-  const [lang, setLang] = useLanguage()
+  const [lang, setLang] = useState<any>(localStorage.getItem("lang") || null )
+    
 
   console.log(lang);
   
@@ -48,17 +49,17 @@ export default function Home() {
         priority
         className="w-full h-[280px] sm:h-[1000px] object-cover"
       />
-      <SidebarMenu isOpen={isSideBarOpen} onClose={() => setIsSideBarOpen(false)} />
-      <BorderDiv title={lang == "ru" ? "Сезонная распродажа!" : "Mavsumiy sotuv!"} extraClass="!shadow-2xl " />
+      <SidebarMenu  isOpen={isSideBarOpen} onClose={() => setIsSideBarOpen(false)} />
+      <BorderDiv  title={lang == "ru" ? "Сезонная распродажа!" : "Mavsumiy sotuv!"} extraClass="!shadow-2xl " />
 
 
       <SalePage/>
 
 
-      <BorderDiv title={lang == "ru" ? "Каркасные бассейны" : "Ramkali Hovuzlar"} extraClass="!shadow-2xl" />
+      <BorderDiv id="karkasniy"   title={lang == "ru" ? "Каркасные бассейны" : "Ramkali Hovuzlar"} extraClass="!shadow-2xl" />
       <Pools onOpen={handleOpenModal} />
 
-      <BorderDiv title={lang == "ru" ?  "Надувные бассейны" : "Puflanadigan hovuzlar"} extraClass="!shadow-2xl" />
+      <BorderDiv id="naduvniy"  title={lang == "ru" ?  "Надувные бассейны" : "Puflanadigan hovuzlar"} extraClass="!shadow-2xl" />
       <ThreePools onOpen={handleOpenModal} />
 
       <DeliveryDiv isOpen={setIsConsultationOpen}  />

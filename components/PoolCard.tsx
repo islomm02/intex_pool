@@ -1,7 +1,7 @@
 import { API } from "@/hooks/getEnv";
 import { FormatterPrice } from "@/hooks/PriceFormatter";
-import { useLanguage } from "@/hooks/SetLanguage";
 import { PoolsType } from "@/types";
+import { useState } from "react";
 
 const PoolCard = ({
     item,
@@ -10,7 +10,8 @@ const PoolCard = ({
     item: PoolsType;
     onOpen: (item: PoolsType) => void;
 }) => {
-    const [lang, SetLang] = useLanguage();
+    const [lang, setLang] = useState<any>(localStorage.getItem("lang") || null )
+    
 
     return (
         <div className="w-[340px] h-[284px] relative border border-[#ededed] shadow-2xl rounded-tr-[40px] rounded-bl-[40px] rounded-br-[40px] transition-transform duration-300 hover:scale-102">
@@ -31,7 +32,7 @@ const PoolCard = ({
                     </p>
 
                     <h2 className="text-black text-[20px] font-semibold">
-                        {FormatterPrice(item.discountedPrice)}{" "}
+                        {item.discountedPrice ? FormatterPrice(item.discountedPrice) : FormatterPrice(item.price)}{" "}
                         {lang == "ru" ? "сум" : "so'm"}
                     </h2>
                 </div>
@@ -76,3 +77,4 @@ const PoolCard = ({
 };
 
 export default PoolCard;
+

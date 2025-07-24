@@ -19,6 +19,9 @@ const ConsultationModal: React.FC<ModalProps> = ({
     setIsSuccessOpen,
     setIsOpen
 }) => {
+
+    const [lang, setLang] = useState<any>(localStorage.getItem("lang") || null )
+
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
 
@@ -62,53 +65,52 @@ const ConsultationModal: React.FC<ModalProps> = ({
     return (
         <div className="fixed inset-0 z-50 bg-white/5 backdrop-blur-2xl bg-opacity-70 flex items-center justify-center">
             <div className="relative w-full sm:w-full sm:h-full flex items-center justify-center">
-                <div className="bg-white p-6 rounded-lg shadow-lg max-w-[90%] max-h-[90%] overflow-auto relative">
-                    <button
-                        onClick={onClose}
-                        className="absolute top-2 right-2 text-gray-600 hover:text-black text-2xl"
-                    >
-                        &times;
-                    </button>
-                    <div className=" w-[329px] sm:w-[441px] h-[436px] sm:h-[584px] flex flex-col justify-center items-center">
-                        <Image
-                            src="/CallCenter.png"
-                            alt="Success"
-                            width={121}
-                            height={131}
-                            className="!w-[90px] !h-[97px] sm:w-[121px] sm:h-[131px] "
-                        />
-                        <h2 className=" text-[22px] sm:text-[30px] pb-[30px] font-bold text-black mt-6">
-                            Получить консультацию
-                        </h2>
-                        <form
-                            onSubmit={(e) => handleSubmit(e)}
-                            autoComplete="off"
-                            className="w-[400px] flex flex-col gap-[17px] justify-center items-center  mr-[20px] "
-                        >
-                            <input
-                                className=" w-[268px] h-[46px] sm:w-[359px] sm:h-[61px] border-[1px] border-[#c9c9c9] shadow-xl text-[25px] text-[#A3A3A3] text-center rounded-[17px] "
-                                name="name"
-                                type="text"
-                                placeholder="Ваше имя"
-                            />
-                            <input
-                                className="w-[268px] h-[46px] sm:w-[359px] sm:h-[61px] border-[1px] border-[#c9c9c9] shadow-xl text-[25px] text-[#A3A3A3] text-center rounded-[17px] "
-                                name="phone"
-                                type="text"
-                                placeholder="Ваш номер"
-                            />
-                            <button
-                                //   onClick={() => setIsButtonLoading(true)}
-                                type="submit"
-                                // onClick={}
-                                className="bg-[#FFE600] mt-[14px] !shadow-2xl cursor-pointer w-[237px] h-[46px] rounded-[10px] px-[25px] py-[3px] text-[15px] text-black font-semibold"
-                            >
-                                Заказать
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
+  <div className="bg-white p-6 rounded-lg shadow-lg max-w-[90%] max-h-[90%] overflow-auto relative">
+    <button
+      onClick={onClose}
+      className="absolute top-2 right-2 text-gray-600 hover:text-black text-2xl"
+    >
+      &times;
+    </button>
+    <div className="w-[329px] sm:w-[441px] h-[436px] sm:h-[584px] flex flex-col justify-center items-center">
+      <Image
+        src="/CallCenter.png"
+        alt="Success"
+        width={121}
+        height={131}
+        className="!w-[90px] !h-[97px] sm:w-[121px] sm:h-[131px]"
+      />
+      <h2 className="text-[22px] sm:text-[30px] pb-[30px] font-bold text-black mt-6">
+        Konsultatsiya olish
+      </h2>
+      <form
+        onSubmit={(e) => handleSubmit(e)}
+        autoComplete="off"
+        className="w-[400px] flex flex-col gap-[17px] justify-center items-center mr-[20px]"
+      >
+        <input
+          className="w-[268px] h-[46px] sm:w-[359px] sm:h-[61px] border-[1px] border-[#c9c9c9] shadow-xl text-[25px] text-[#A3A3A3] text-center rounded-[17px]"
+          name="name"
+          type="text"
+          placeholder="Ismingiz"
+        />
+        <input
+          className="w-[268px] h-[46px] sm:w-[359px] sm:h-[61px] border-[1px] border-[#c9c9c9] shadow-xl text-[25px] text-[#A3A3A3] text-center rounded-[17px]"
+          name="phone"
+          type="text"
+          placeholder="Telefon raqamingiz"
+        />
+        <button
+          type="submit"
+          className="bg-[#FFE600] mt-[14px] !shadow-2xl cursor-pointer w-[237px] h-[46px] rounded-[10px] px-[25px] py-[3px] text-[15px] text-black font-semibold"
+        >
+          Buyurtma berish
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
         </div>
     );
 };
